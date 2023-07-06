@@ -12,16 +12,18 @@ public class FilteringApples{
                 new Apple(120, "red"));
 
         // 람다식 사용 [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-
+        filterApples(inventory, apple -> apple.getColor().equals("green"))
+                .forEach(System.out::println);
 
         // 람다식 사용[Apple{color='green', weight=155}]
-
+        filterApples(inventory, apple -> apple.getWeight() >= 150)
+                .forEach(System.out::println);
 
         // Method Reference 사용 [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-
+        filterApples(inventory, FilteringApples::isGreenApple);
 
         // Method Reference 사용 [Apple{color='green', weight=155}]
-
+        filterApples(inventory, FilteringApples::isHeavyApple);
 
         // []
         List<Apple> weirdApples = filterApples(inventory, (Apple a) -> a.getWeight() < 80 ||
@@ -31,11 +33,11 @@ public class FilteringApples{
 
 
     public static boolean isGreenApple(Apple apple) {
-        return true;
+        return apple.getColor().equals("green");
     }
 
     public static boolean isHeavyApple(Apple apple) {
-        return true;
+        return apple.getWeight() > 150;
     }
 
     public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> predicate){
