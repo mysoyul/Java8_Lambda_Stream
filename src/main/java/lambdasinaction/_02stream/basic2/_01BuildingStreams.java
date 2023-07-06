@@ -19,7 +19,8 @@ public class _01BuildingStreams {
 
         // Arrays._02stream
         int[] numbers = {2, 3, 5, 7, 11, 13};
-        System.out.println(Arrays.stream(numbers).sum());
+        IntStream intStream = Arrays.stream(numbers);
+        System.out.println(intStream.sum());
 
         // Stream.iterate
         Stream.iterate(0, n -> n + 2)
