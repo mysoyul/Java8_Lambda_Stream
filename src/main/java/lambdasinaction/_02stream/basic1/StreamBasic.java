@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.reverseOrder;
+import static java.util.Collections.synchronizedSet;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
@@ -20,6 +21,8 @@ public class StreamBasic {
         System.out.println("===> getHighCaloricDishesNamesInJava8MethodRef");
         getHighCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
 
+        System.out.println(getGroupingMenu(Dish.menu));
+        System.out.println(getMaxCaloryDish(Dish.menu));
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -83,8 +86,14 @@ public class StreamBasic {
 
     //가장 칼로리가 높은 메뉴를 찾아라
     public static Dish getMaxCaloryDish (List<Dish> dishes) {
-        return null;
+        Optional<Dish> optional = dishes.stream() //Stream<Dish>
+                //max(Comparator)
+                .max(comparing(Dish::getCalories));
+        Dish dish = optional.get();
+        return dish;
 
-
+//        return dishes.stream()
+//                .max(comparing(Dish::getCalories))
+//                .get();
     }
 }
