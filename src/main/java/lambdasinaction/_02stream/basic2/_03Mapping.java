@@ -65,11 +65,17 @@ public class _03Mapping {
 
         //<R> Stream<R> map(Function<? super T,? extends R> mapper)
         //<R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
+        //Arrays클래스의 stream() : public static <T> Stream<T> stream(T[] array)
 
         //3.flatMap - 중복된 문자 제거가 word 리스트
+        List<String> strings = words.stream()
+                .map(word -> word.split(""))
+                .flatMap(wordArray -> Arrays.stream(wordArray))
+                .distinct()
+                .collect(toList());
+        strings.forEach(System.out::print);
 
-
-
+        System.out.println();
 
         // flatMap
         List<Integer> numbers1 = Arrays.asList(1,2,3,4,5);
