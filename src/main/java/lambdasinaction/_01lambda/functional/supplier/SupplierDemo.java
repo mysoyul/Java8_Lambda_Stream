@@ -22,9 +22,20 @@ public class SupplierDemo {
 	}
 
 	public static void main(String[] args) {
+		// Anonymous Inner Class
+		driveVehicle(new Supplier<Vehicle>() {
+			@Override
+			public Vehicle get() {
+				return new Vehicle();
+			}
+		});
+
 		// Using Lambda expression
-		
-		
+		driveVehicle(() -> new Vehicle());
+		driveVehicle(() -> new Car());
+
 		// Using Method Reference
+		driveVehicle(Vehicle::new);
+		driveVehicle(Car::new);
 	}
 }
