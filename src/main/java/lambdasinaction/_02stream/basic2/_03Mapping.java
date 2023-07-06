@@ -56,7 +56,15 @@ public class _03Mapping {
         System.out.println(wordLengths);
 
         //2. map - 중복된 문자 제거한 word 리스트
+        List<String[]> stringList = words.stream()
+                .map(word -> word.split("")) //Stream<String[]>
+                .distinct()
+                .collect(toList());
+        stringList
+                .forEach(System.out::println);
 
+        //<R> Stream<R> map(Function<? super T,? extends R> mapper)
+        //<R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
 
         //3.flatMap - 중복된 문자 제거가 word 리스트
 
