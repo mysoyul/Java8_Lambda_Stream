@@ -26,7 +26,7 @@ public class SupplierDemo {
 		driveVehicle(new Supplier<Vehicle>() {
 			@Override
 			public Vehicle get() {
-				return new Vehicle();
+				return new Car();
 			}
 		});
 
