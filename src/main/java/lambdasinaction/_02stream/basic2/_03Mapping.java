@@ -10,8 +10,14 @@ public class _03Mapping {
 
     public static void main(String...args){
 
-        //1. map - Dish의 name 목록만
+        //1. map - Dish의 name 목록만 List<String>
+        List<String> nameList = menu.stream() //Stream<Dish>
+                //.map(dish -> dish.getName()) //Stream<String>
+                .map(Dish::getName)
+                .collect(toList());
+        nameList.forEach(System.out::println);
 
+        //2. Dish 칼로리 합계
 
 
         // map

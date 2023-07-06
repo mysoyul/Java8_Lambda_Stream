@@ -34,10 +34,11 @@ public class _02Filtering {
 
         dishesLimit3.forEach(System.out::println);
 
+        System.out.println(" Skipping 2 elements");
         //4. Skipping elements
-        //List<Dish> dishesSkip2 =
-
-
-
+        List<Dish> dishesSkip2 = menu.stream()
+                .skip(2)
+                .collect(toList());
+        dishesSkip2.forEach(System.out::println);
     }
 }
