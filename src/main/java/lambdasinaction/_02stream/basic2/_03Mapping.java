@@ -34,6 +34,12 @@ public class _03Mapping {
         System.out.println("2. sumOfCalory = " + sumOfCalory);
 
         //2.2 mapToInt() / sum()
+        sumOfCalory = menu.stream() //Stream<Dish>
+                //mapToInt(ToIntFunction) ToIntFunction의 추상메서드 int applyAsInt(T value)
+                .mapToInt(dish -> dish.getCalories()) //IntStream
+                .sum();
+        System.out.println("3. sumOfCalory = " + sumOfCalory);
+
         //2.3 collect(Collector) Collectors.summingInt()
 
         // map
