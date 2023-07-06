@@ -22,8 +22,9 @@ public class _02Filtering {
 
         // 2. Filtering unique elements
         List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
-
-
+        numbers.stream()
+                .distinct()
+                .forEach(System.out::println);
 
         //3. Truncating 3 stream ( d.getCalories() > 300 )
         //List<Dish> dishesLimit3 =
