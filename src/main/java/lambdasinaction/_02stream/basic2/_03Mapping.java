@@ -3,6 +3,8 @@ package lambdasinaction._02stream.basic2;
 import lambdasinaction._02stream.basic1.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.toList;
 import static lambdasinaction._02stream.basic1.Dish.menu;
 
@@ -41,6 +43,10 @@ public class _03Mapping {
         System.out.println("3. sumOfCalory = " + sumOfCalory);
 
         //2.3 collect(Collector) Collectors.summingInt()
+        //public static <T> Collector<T,?,Integer> summingInt(ToIntFunction<? super T> mapper)
+        sumOfCalory = menu.stream()
+                .collect(Collectors.summingInt(Dish::getCalories));
+        System.out.println("4. sumOfCalory = " + sumOfCalory);
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
