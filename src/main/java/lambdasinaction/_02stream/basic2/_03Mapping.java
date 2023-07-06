@@ -18,7 +18,13 @@ public class _03Mapping {
         nameList.forEach(System.out::println);
 
         //2. Dish 칼로리 합계
-
+        //2.1 map() / reduce()
+        menu.stream()
+                .map(Dish::getCalories) //Stream<Integer>
+                //BinaryOperator R apply(T t, U u)
+                .reduce((prev,next) -> prev + next);
+        //2.2 mapToInt() / sum()
+        //2.3 collect(Collector) Collectors.summingInt()
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
