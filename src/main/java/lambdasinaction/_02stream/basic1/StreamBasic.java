@@ -16,7 +16,7 @@ public class StreamBasic {
 
         // Java 8
         getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
-
+        System.out.println("===> getHighCaloricDishesNamesInJava8MethodRef");
         getHighCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
 
     }
@@ -56,9 +56,11 @@ public class StreamBasic {
         return dishNameList.subList(0,3);
     }
     public static List<String> getHighCaloricDishesNamesInJava8MethodRef(List<Dish> dishes){
+        Comparator<Dish> reverseComparator = Collections.reverseOrder(comparing(Dish::getCalories));
+
         return dishes.stream()
-                .filter(dish -> dish.getCalories() >= 400)
-                .sorted(comparing(Dish::getCalories))
+                .filter(dish -> dish.getCalories() > 400)
+                .sorted(reverseComparator)
                 .map(Dish::getName)
                 .collect(toList());
     }
