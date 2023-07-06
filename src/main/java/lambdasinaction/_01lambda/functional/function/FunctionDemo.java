@@ -41,7 +41,8 @@ public class FunctionDemo {
 
 		// 3. Method Reference
 		// Function<Apple,String> function = Apple :: getColor;
-		getColorList(inventory, Apple::getColor)
+		Function<Apple,String> appleFunction = Apple::getColor;
+		getColorList(inventory, appleFunction)
 				.forEach(System.out::println);
 
 	}
