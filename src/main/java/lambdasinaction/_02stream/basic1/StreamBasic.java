@@ -3,6 +3,7 @@ package lambdasinaction._02stream.basic1;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.reverseOrder;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
@@ -60,16 +61,23 @@ public class StreamBasic {
 
         return dishes.stream()
                 .filter(dish -> dish.getCalories() > 400)
-                .sorted(reverseComparator)
+                //.sorted(reverseComparator)
+                .sorted(reverseOrder(comparing(Dish::getCalories)))
                 .map(Dish::getName)
                 .collect(toList());
     }
 
 
-    //400칼로리 이하인 메뉴를 다이어트로, 아닐 경우 일반으로 그룹핑해라.
+    //400칼로리 이하인 메뉴를 diet, 아닐 경우 normal 그룹핑해라.
     public static Map<String, List<Dish>>  getGroupingMenu(List<Dish> dishes){
-        return null;
-
+        Map<String, List<Dish>> dishMap = dishes.stream() //Stream<Dish>
+                //collect(Collector) Collectors.groupingBy()
+                //public static <T,K> Collector<T,?,Map<K,List<T>>> groupingBy(Function<? super T,? extends K> classifier)
+                .collect(Collectors.groupingBy(dish -> {
+                    if (dish.getCalories() <= 400) return "diet";
+                    else return "normal";
+                }));
+        return dishMap;
     }
 
 
