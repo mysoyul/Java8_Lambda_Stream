@@ -17,6 +17,8 @@ public class StreamBasic {
         // Java 8
         getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
 
+        getHighCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
+
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -47,12 +49,20 @@ public class StreamBasic {
                 //.filter(Predicate) T -> boolean
                 .filter(dish -> dish.getCalories() <= 400) //Stream<Dish>
                 //sorted(Comparator) comparing() 메서드의 Function<Dish,Integer>
-                .sorted(comparing(dish -> dish.getCalories())) //Stream<Dish>
+                .sorted(Comparator.comparing(dish -> dish.getCalories())) //Stream<Dish>
                 //map(Function) Function<Dish,String>
                 .map(dish -> dish.getName()) //Stream<String>
-                .collect(toList());
-        return dishNameList;
+                .collect(Collectors.toList());
+        return dishNameList.subList(0,3);
     }
+    public static List<String> getHighCaloricDishesNamesInJava8MethodRef(List<Dish> dishes){
+        return dishes.stream()
+                .filter(dish -> dish.getCalories() >= 400)
+                .sorted(comparing(Dish::getCalories))
+                .map(Dish::getName)
+                .collect(toList());
+    }
+
 
     //400칼로리 이하인 메뉴를 다이어트로, 아닐 경우 일반으로 그룹핑해라.
     public static Map<String, List<Dish>>  getGroupingMenu(List<Dish> dishes){
