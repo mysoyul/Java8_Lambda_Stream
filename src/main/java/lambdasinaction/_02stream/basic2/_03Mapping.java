@@ -19,10 +19,20 @@ public class _03Mapping {
 
         //2. Dish 칼로리 합계
         //2.1 map() / reduce()
-        menu.stream()
+        Integer sumOfCalory = menu.stream()
                 .map(Dish::getCalories) //Stream<Integer>
                 //BinaryOperator R apply(T t, U u)
-                .reduce((prev,next) -> prev + next);
+                .reduce(0, (prev, next) -> prev + next);
+        System.out.println("1. sumOfCalory = " + sumOfCalory);
+
+        //2.1.1 map() / reduce(Integer::sum)
+        //Integer의 public static int sum(int a, int b)
+        sumOfCalory = menu.stream()
+                .map(Dish::getCalories) //Stream<Integer>
+                .reduce(Integer::sum) //Optional<Integer>
+                .get();
+        System.out.println("2. sumOfCalory = " + sumOfCalory);
+
         //2.2 mapToInt() / sum()
         //2.3 collect(Collector) Collectors.summingInt()
 
