@@ -30,6 +30,7 @@ public class OperatorExample {
         });
 		System.out.println("minValue = " + minValue);
 
+		//3. Method Reference 최대,최소값 얻기
 		//public static int max(int a, int b)
 		maxValue = maxOrMin(Integer::max);
 		System.out.println("maxValue = " + maxValue);

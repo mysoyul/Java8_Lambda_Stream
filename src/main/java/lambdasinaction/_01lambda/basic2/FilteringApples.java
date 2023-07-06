@@ -38,8 +38,13 @@ public class FilteringApples{
         return true;
     }
 
-    public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
-
-        return null;
+    public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> predicate){
+        ArrayList<Apple> apples = new ArrayList<>();
+        for (Apple apple: inventory) {
+            if(predicate.test(apple)){
+                apples.add(apple);
+            }
+        }
+        return apples;
     }
 }
