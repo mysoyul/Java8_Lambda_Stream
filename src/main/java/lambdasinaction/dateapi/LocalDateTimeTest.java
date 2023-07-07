@@ -35,8 +35,8 @@ public class LocalDateTimeTest {
 		//LocalTime 사용
 		LocalTime now = LocalTime.now();
 		System.out.println(now);
-		System.out.println("시분초 : " + now.getHour()+ ":" + 
-				now.getMinute()+":"+now.getSecond()+":"+now.getNano());
+		System.out.println("시분초 : " + now.getHour()+ "-" +
+				now.getMinute()+"-"+now.getSecond()+"-"+now.getNano());
 		
 		LocalTime bedTime = LocalTime.of(23, 30);
 		LocalTime wakeTime = bedTime.plusHours(7);
@@ -62,7 +62,7 @@ public class LocalDateTimeTest {
 		
 		//포맷을 직접 지정한 Formatter 생성
 		DateTimeFormatter formatter = 
-				DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss E a",Locale.KOREA);
+				DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss E a", Locale.KOREA);
 		//사용자가 생성한 Formatter 지정
 		System.out.println(dt.format(formatter));
 		
