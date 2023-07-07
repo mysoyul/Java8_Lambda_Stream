@@ -39,8 +39,7 @@ public class _05PartitioningDishes {
     private static Map<Boolean, Dish> mostCaloricPartitionedByVegetarian() {
         Map<Boolean, Dish> booleanDishMap = menu.stream()
                 .collect(partitioningBy(Dish::isVegetarian, collectingAndThen(
-                        maxBy(getDishComparator()),
-                        Optional::get
+                        maxBy(getDishComparator()), Optional::get
                 )));
         return booleanDishMap;
     }
