@@ -24,20 +24,20 @@ public class _04GroupingDishes {
     //1. type별 그룹핑
     private static Map<Dish.Type, List<Dish>> groupDishesByType() {
         return menu.stream()
-                .collect(groupingBy(getDishTypeFunction()));
+                .collect(groupingBy(getDishType()));
     }
 
-    private static Function<Dish, Dish.Type> getDishTypeFunction() {
+    private static Function<Dish, Dish.Type> getDishType() {
         return Dish::getType;
     }
 
     //2. 칼로리별 그룹핑
     private static Map<CaloricLevel, List<Dish>> groupDishesByCaloricLevel() {
         return menu.stream()
-                .collect(groupingBy(getCaloricLevelFunction()));
+                .collect(groupingBy(getCaloricLevel()));
     }
 
-    private static Function<Dish, CaloricLevel> getCaloricLevelFunction() {
+    private static Function<Dish, CaloricLevel> getCaloricLevel() {
         return dish -> {
             if (dish.getCalories() <= 400) return CaloricLevel.DIET;
             else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
@@ -48,16 +48,23 @@ public class _04GroupingDishes {
     //3. type별로 그룹핑 후에 다시 칼로리별로 그룹핑
     private static Map<Dish.Type, Map<CaloricLevel, List<Dish>>> groupDishedByTypeAndCaloricLevel() {
         return menu.stream()
-                .collect(groupingBy(getDishTypeFunction(), groupingBy(getCaloricLevelFunction())));
+                .collect(groupingBy(getDishType(), groupingBy(getCaloricLevel())));
     }
     //4. type별 갯수 카운팅
     private static Map<Dish.Type, Long> countDishesInGroups() {
-        return null;
+        return menu.stream()
+                .collect(groupingBy(getDishType(), counting()));
     }
     //5. type별 그룹에서 가장 칼로리가 높은 Dish 찾기
     private static Map<Dish.Type, Optional<Dish>> mostCaloricDishesByType() {
-        return null;
+        return menu.stream()
+                .collect(groupingBy(getDishType(), maxBy(getDishComparator())));
     }
+
+    private static Comparator<Dish> getDishComparator() {
+        return Comparator.comparingInt(Dish::getCalories);
+    }
+
     //5.1 type별 그룹에서 가장 칼로리가 높은 Dish 찾기 - collectingAndThen() 사용
     private static Map<Dish.Type, Dish> mostCaloricDishesByTypeWithoutOptionals() {
         return null;
@@ -70,6 +77,6 @@ public class _04GroupingDishes {
 
     private static Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType() {
         return menu.stream().collect(
-                groupingBy(getDishTypeFunction(), mapping(getCaloricLevelFunction(), toSet())));
+                groupingBy(getDishType(), mapping(getCaloricLevel(), toSet())));
     }
 }
