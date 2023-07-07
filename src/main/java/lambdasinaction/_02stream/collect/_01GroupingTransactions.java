@@ -25,6 +25,7 @@ public class _01GroupingTransactions {
         groupImperatively();
         groupFunctionally();
 
+        groupByCurrencySumValue();
     }
 
     private static void groupImperatively() {
@@ -58,6 +59,11 @@ public class _01GroupingTransactions {
 
         Double sumOfGBP = currencyDoubleMap.get(Currency.GBP);
         System.out.println("sumOfGBP = " + sumOfGBP);
+    }
+
+    //각 트랜잭션을 통화별로 그룹화 한 뒤 각 트랜잭션이 5000 이상일 경우를 구분하여 리스트로 반환
+    public static void groupByCurrencyGrater5000() {
+
     }
 
     public static class Transaction {
