@@ -12,8 +12,8 @@ public class _04Finding {
             System.out.println("Vegetarian friendly");
         }
 
-        System.out.println(isHealthyMenu());
-        System.out.println(isHealthyMenu2());
+        System.out.println(allMatchMenu());
+        System.out.println(noneMatchMenu());
         
         Optional<Dish> dish = findVegetarianDish();
         dish.ifPresent(d -> System.out.println(d.getName()));
@@ -21,16 +21,16 @@ public class _04Finding {
 
     //1. anyMatch
     private static boolean isVegetarianFriendlyMenu(){
-        return false;
+        return menu.stream().anyMatch(Dish::isVegetarian);
     }
     //2.allMatch
-    private static boolean isHealthyMenu(){
+    private static boolean allMatchMenu(){
 
         return false;
     }
 
     //3. noneMatch
-    private static boolean isHealthyMenu2(){
+    private static boolean noneMatchMenu(){
 
         return false;
     }
