@@ -20,6 +20,7 @@ public class _04GroupingDishes {
         System.out.println("Most caloric dishes by type: " + mostCaloricDishesByTypeWithoutOptionals());
         System.out.println("Sum calories by type: " + sumCaloriesByType());
         System.out.println("Caloric levels by type: " + caloricLevelsByType());
+        System.out.println("Average calories by caloric level: " + averageCalroiesByCaloricLevel());
     }
 
     //1. type별 그룹핑
@@ -91,5 +92,11 @@ public class _04GroupingDishes {
     private static Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType() {
         return menu.stream().collect(
                 groupingBy(getDishType(), mapping(getCaloricLevel(), toSet())));
+    }
+
+    //8. CaloricLevel별로 그룹핑하여 평균 칼로리 계산하기
+    private static Map<CaloricLevel, Double> averageCalroiesByCaloricLevel() {
+        return menu.stream()
+                .collect(groupingBy(getCaloricLevel(), averagingDouble(Dish::getCalories)));
     }
 }
