@@ -20,8 +20,12 @@ public class MobileTesterWithOptional {
 
 		//orElseGet() 사용
 		Optional<DisplayFeatures> optionalDisplayFeatures = mobile2.getDisplayFeatures();
-		DisplayFeatures displayFeatures = optionalDisplayFeatures.get();
+		DisplayFeatures displayFeatures = optionalDisplayFeatures
+						.orElseGet(() -> new DisplayFeatures("0.0", Optional.empty()));
 		System.out.println(displayFeatures.getSize());
+
+		displayFeatures = optionalDisplayFeatures
+				.orElseThrow(() -> new RuntimeException("DisplayFeactures is null"));
 	}
 
 }

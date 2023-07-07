@@ -1,6 +1,7 @@
 package lambdasinaction._02stream.collect;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -42,8 +43,11 @@ public class _01GroupingTransactions {
 
     //Java8 groupingBy 사용
     private static void groupFunctionally() {
-
-
+        Map<Currency, List<Transaction>> txMap = transactions.stream()
+                //.collect(Collectors.groupingBy(tx -> tx.getCurrency()))
+                .collect(groupingBy(Transaction::getCurrency));
+        System.out.println("txMap = " + txMap);
+        txMap.get(Currency.EUR).forEach(System.out::println);
 
     }
 
