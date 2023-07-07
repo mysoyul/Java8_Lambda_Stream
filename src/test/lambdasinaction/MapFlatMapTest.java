@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -32,6 +33,7 @@ public class MapFlatMapTest {
                 .forEach(System.out::println);
 
         //map() : <R> Stream<R> map(Function<? super T,? extends R> mapper)
+        
         List<List<String>> phoneList = customers.stream() //Stream<Customer>
                 .map(cust -> cust.getPhoneNumbers()) //Stream<List<String>>
                 .collect(toList()); //List<List<String>>
@@ -39,9 +41,12 @@ public class MapFlatMapTest {
 
         //flatMap : <R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
         List<String> phoneList2 = customers.stream() //Stream<Customer>
-                .flatMap(customer -> customer.getPhoneNumbers().stream())   //Stream<Stream<List<String>>>
+                .flatMap(customer -> customer.getPhoneNumbers().stream())   //Stream<String>>
                 .collect(toList());
         System.out.println("phoneList2 = " + phoneList2);
+
+        Stream<String> stringStream = customers.stream() //Stream<Customer>
+                .flatMap(customer -> customer.getPhoneNumbers().stream());
 
     }
 
