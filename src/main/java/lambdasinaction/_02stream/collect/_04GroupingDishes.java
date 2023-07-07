@@ -82,9 +82,12 @@ public class _04GroupingDishes {
 
     //6. type별로 그룹핑하여 칼로리의 합계 내기
     private static Map<Dish.Type, Integer> sumCaloriesByType() {
-        return null;
+
+        return menu.stream()
+                .collect(groupingBy(getDishType(), summingInt(Dish::getCalories)));
     }
 
+    //7. Dish Type별로 그룹핑하여 해당 그룹의 CaloricLevel을 Set로 출력하기
     private static Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType() {
         return menu.stream().collect(
                 groupingBy(getDishType(), mapping(getCaloricLevel(), toSet())));
