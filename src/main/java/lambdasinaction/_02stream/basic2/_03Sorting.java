@@ -2,6 +2,7 @@ package lambdasinaction._02stream.basic2;
 
 import java.util.*;
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 
 public class _03Sorting {
 
@@ -12,7 +13,7 @@ public class _03Sorting {
                 .sorted(new Comparator<Integer>() {
                     @Override
                     public int compare(Integer o1, Integer o2) {
-                        return o2 - o1;
+                        return o2.compareTo(o1);
                     }
                 })
                 .forEach(System.out::println);
@@ -40,9 +41,12 @@ public class _03Sorting {
         
         // 2. 구현 anonymous inner class 
         // [Apple{color='green', weight=30}, Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-        
-        
-        
+        inventory.sort(new Comparator<Apple>() {
+            @Override
+            public int compare(Apple o1, Apple o2) {
+                return o1.getWeight().compareTo(o2.getWeight());
+            }
+        });
         System.out.println(inventory);
 
         // reshuffling things a little
@@ -50,15 +54,17 @@ public class _03Sorting {
         
         // 3. 구현 lambda 
         // [Apple{color='red', weight=20}, Apple{color='green', weight=30}, Apple{color='green', weight=155}]
+        inventory.sort((a1,a2) -> a1.getWeight().compareTo(a2.getWeight()));
+        System.out.println(inventory);
 
-        
         // reshuffling things a little
         inventory.set(1, new Apple(10, "red"));
         
         // 4. 구현 Method Reference
         // [Apple{color='red', weight=10}, Apple{color='red', weight=20}, Apple{color='green', weight=155}]
-
-    
+        inventory.sort(comparingInt(apple -> apple.getWeight()));
+        inventory.sort(comparingInt(Apple::getWeight));
+        System.out.println(inventory);
     }
 
     public static class Apple {
