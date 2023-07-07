@@ -3,6 +3,7 @@ package lambdasinaction._02stream.collect;
 import java.util.*;
 import java.util.function.*;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.*;
 import static lambdasinaction._02stream.collect.Dish.menu;
 
@@ -21,13 +22,15 @@ public class _02Summarizing {
 
 
     private static long howManyDishes() {
-        return menu.stream().collect(counting());
+        return menu.stream()
+                        .collect(counting());
     }
 
     //1. Comparator 를 사용한 collect(), reducing()
     private static Dish findMostCaloricDishUsingComparator() {
-
-        return null;
+        return menu.stream()
+                .collect(maxBy(comparingInt(Dish::getCalories)))
+                .get();
     }
 
     //collect() - reducing 사용

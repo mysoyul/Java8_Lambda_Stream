@@ -70,7 +70,7 @@ public class _01GroupingTransactions {
                         )
                 );
         System.out.println(map);
-        map.get(Currency.USD) //Map<Boolean, List<Transaction>
+        map.get(Currency.EUR) //Map<Boolean, List<Transaction>
                 .get(Boolean.FALSE) //List<Transaction>
                 .forEach(System.out::println);
     }
