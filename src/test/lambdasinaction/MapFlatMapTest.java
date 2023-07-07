@@ -45,8 +45,8 @@ public class MapFlatMapTest {
                 .collect(toList());
         System.out.println("phoneList2 = " + phoneList2);
 
-        Stream<String> stringStream = customers.stream() //Stream<Customer>
-                .flatMap(customer -> customer.getPhoneNumbers().stream());
+        customers.stream() //Stream<Customer>
+                .flatMap(customer -> customer.getPhoneNumbers().stream())
 
     }
 

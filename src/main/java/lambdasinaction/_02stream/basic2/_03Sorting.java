@@ -6,6 +6,24 @@ import static java.util.Comparator.comparing;
 public class _03Sorting {
 
     public static void main(String...args){
+        List<Integer> integers = Arrays.asList(10, 3, 6, 18, 1, 4);
+        //1. Anonymous inner class
+        integers.stream()
+                .sorted(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o2 - o1;
+                    }
+                })
+                .forEach(System.out::println);
+        //2. Lambda
+        integers.stream()
+                .sorted((n1,n2) -> n1.compareTo(n2))
+                .forEach(System.out::println);
+        //3. Method Reference
+        integers.stream()
+                .sorted(Integer::compareTo)
+                .forEach(System.out::println);
 
         // 1. static inner class 
         List<Apple> inventory = new ArrayList<>();
