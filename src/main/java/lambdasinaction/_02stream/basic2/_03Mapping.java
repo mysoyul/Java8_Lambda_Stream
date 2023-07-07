@@ -77,6 +77,11 @@ public class _03Mapping {
 
         System.out.println();
 
+        words.stream()
+                .flatMap(word -> Arrays.stream(word.split("")))
+                .distinct()
+                .forEach(System.out::println);
+
         // flatMap
         List<Integer> numbers1 = Arrays.asList(1,2,3,4,5);
         List<Integer> numbers2 = Arrays.asList(6,7,8);
