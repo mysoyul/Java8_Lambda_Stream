@@ -40,19 +40,20 @@ public class _02Summarizing {
 
     //2. summingInt() 사용
     private static int calculateTotalCalories() {
-
-        return 0;
+        return menu.stream()
+                .collect(summingInt(Dish::getCalories));
     }
 
     //3. averagingInt() 사용
     private static Double calculateAverageCalories() {
-
-        return 0.0;
+        return menu.stream()
+                .collect(averagingDouble(Dish::getCalories));
     }
 
     //4. summarizingInt() 사용
     private static IntSummaryStatistics calculateMenuStatistics() {
-        return null;
+        return menu.stream()
+                .collect(summarizingInt(Dish::getCalories));
     }
 
     //5. joining() 사용
