@@ -2,6 +2,7 @@ package lambdasinaction._02stream.collect;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collector;
 
 import static java.util.stream.Collectors.*;
 import static lambdasinaction._02stream.collect.Dish.menu;
@@ -71,6 +72,12 @@ public class _04GroupingDishes {
                 .collect(groupingBy(getDishType(), collectingAndThen(
                         maxBy(getDishComparator()), Optional::get
                 )));
+    }
+
+    private static Collector<Dish, Object, Dish> getDownstream() {
+        return collectingAndThen(
+                maxBy(getDishComparator()), Optional::get
+        );
     }
 
     //6. type별로 그룹핑하여 칼로리의 합계 내기
