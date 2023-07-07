@@ -1,5 +1,7 @@
 package lambdasinaction._02stream.collect;
 
+import lambdasinaction._02stream.basic2.Transaction;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,9 @@ public class _01GroupingTransactions {
                 .collect(groupingBy(Transaction::getCurrency));
         System.out.println("txMap = " + txMap);
         txMap.get(Currency.EUR).forEach(System.out::println);
+    }
+    //각 트랜잭션을 통화별로 그룹화 한 다음에 해당 통화의 모든 트랜잭션 합계를 계산하시오.
+    public static void groupByCurrencySumValue() {
 
     }
 
