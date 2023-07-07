@@ -19,13 +19,30 @@ public class _05Reducing {
         Integer sum = numbers.stream()
                 .reduce(0, (n1, n2) -> n1 + n2);
         System.out.println("sum = " + sum);
+
         //IntStream의 sum() 메서드 사용
-        sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        //mapToInt(ToIntFunction) ToIntFunction의 추상메서드 int applyAsInt(T value)
+        sum = numbers.stream()
+                .mapToInt(val -> val.intValue())
+                .sum();
+        System.out.println("sum1 = " + sum);
+
+        sum = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
         System.out.println("sum2 = " + sum);
 
         //sum = numbers.stream().flatMapToInt(number -> IntStream.of(number)).sum();
-        sum = numbers.stream().flatMapToInt(IntStream::of).sum();
-        System.out.println("sum3 = " + sum);
+        sum = numbers.stream()
+                .flatMapToInt(val -> IntStream.of(val))
+                .sum();
+        System.out.println("sum3-1 = " + sum);
+
+        sum = numbers.stream()
+                //flatMapToInt(Function<? super T, ? extends IntStream> mapper)
+                .flatMapToInt(IntStream::of)
+                .sum();
+        System.out.println("sum3-2 = " + sum);
 
         //reduce -  최대값
         int max = numbers.stream().reduce(0, (n1,n2) -> Integer.max(n1,n2));
@@ -33,11 +50,17 @@ public class _05Reducing {
         System.out.println("max = " + max);
 
         //Stream의 min()
-        int minValue = numbers.stream().min(Integer::compareTo).get();
+        int minValue = numbers.stream()
+                //min(Comparator) Comparator의 추상메서드 int compare(T o1, T o2)
+                .min(Integer::compareTo)
+                .get();
         System.out.println("minValue = " + minValue);
 
         //reduce - 최소값
-        Optional<Integer> optional = numbers.stream().reduce(Integer::min);
+        Optional<Integer> optional = numbers.stream()
+                //reduce(BinaryOperator) BinaryOperator의 추상메서드 R apply(T t, U u)
+                //static int min(int a, int b)
+                .reduce(Integer::min);
         minValue = optional.orElse(0);
         System.out.println("minValue2 = " + minValue);
         optional.ifPresent(System.out::println);
@@ -67,9 +90,6 @@ public class _05Reducing {
         IntSummaryStatistics statistics = menu.stream()
                 .collect(Collectors.summarizingInt(Dish::getCalories));
         System.out.println("statistics = " + statistics);
-
-
-
 
     }
 }
