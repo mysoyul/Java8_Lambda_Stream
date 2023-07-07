@@ -24,8 +24,13 @@ public class _04GroupingDishes {
     //1. type별 그룹핑
     private static Map<Dish.Type, List<Dish>> groupDishesByType() {
         return menu.stream()
-                .collect(groupingBy(Dish::getType));
+                .collect(groupingBy(getDishTypeFunction()));
     }
+
+    private static Function<Dish, Dish.Type> getDishTypeFunction() {
+        return Dish::getType;
+    }
+
     //2. 칼로리별 그룹핑
     private static Map<CaloricLevel, List<Dish>> groupDishesByCaloricLevel() {
         return menu.stream()
@@ -42,7 +47,8 @@ public class _04GroupingDishes {
 
     //3. type별로 그룹핑 후에 다시 칼로리별로 그룹핑
     private static Map<Dish.Type, Map<CaloricLevel, List<Dish>>> groupDishedByTypeAndCaloricLevel() {
-        return null;
+        return menu.stream()
+                .collect(groupingBy(getDishTypeFunction(), groupingBy(getCaloricLevelFunction())));
     }
     //4. type별 갯수 카운팅
     private static Map<Dish.Type, Long> countDishesInGroups() {
@@ -64,6 +70,6 @@ public class _04GroupingDishes {
 
     private static Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType() {
         return menu.stream().collect(
-                groupingBy(Dish::getType, mapping(getCaloricLevelFunction(), toSet())));
+                groupingBy(getDishTypeFunction(), mapping(getCaloricLevelFunction(), toSet())));
     }
 }
