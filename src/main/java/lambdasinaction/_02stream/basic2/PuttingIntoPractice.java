@@ -66,8 +66,10 @@ public class PuttingIntoPractice{
         System.out.println("after " + transactions);
 
         // Query 7: What's the highest value in all the transactions?
-
-
-
+        int highValue = transactions.stream()
+                .mapToInt(Transaction::getValue)
+                .max()
+                .getAsInt();
+        System.out.println("highValue = " + highValue);
     }
 }
