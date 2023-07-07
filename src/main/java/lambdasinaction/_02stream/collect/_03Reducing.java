@@ -12,21 +12,26 @@ public class _03Reducing {
         System.out.println("Total calories in menu: " + calculateTotalCaloriesUsingSum());
     }
 
-    //1. Collectors.reducing() 사용 - 칼로리 합
+    //reducing 사용한 칼로리의 합
     private static int calculateTotalCalories() {
-        return 0;
+        return menu.stream().collect(reducing(0, Dish::getCalories, (i, j) -> i + j));
     }
-    //2. Method Reference 로 Collectors.reducing() 사용
+    //reducing 인자로 method 참조를 사용한 칼로리의 합
     private static int calculateTotalCaloriesWithMethodReference() {
-        return 0;
+        return menu.stream().collect(reducing(0, Dish::getCalories, Integer::sum));
     }
-    //3.map() 사용
+    //map - reduce 사용
     private static int calculateTotalCaloriesWithoutCollectors() {
-        return 0;
+        return menu.stream().map(Dish::getCalories)
+                .reduce(Integer::sum) //Optional<Dish>
+                .get();
+    }
+    //mapToInt 사용
+    private static int calculateTotalCaloriesUsingSum() {
+
+        return menu.stream()
+                .mapToInt(Dish::getCalories) //IntStream
+                .sum();
     }
 
-    //4. mapToInt() 사용
-    private static int calculateTotalCaloriesUsingSum() {
-        return menu.stream().mapToInt(Dish::getCalories).sum();
-    }
 }
