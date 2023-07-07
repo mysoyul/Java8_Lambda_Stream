@@ -58,11 +58,14 @@ public class _02Summarizing {
 
     //5. joining() 사용
     private static String getShortMenu() {
-
-        return "";
+        return menu.stream()
+                .map(Dish::getName)
+                .collect(joining(" "));
     }
 
     private static String getShortMenuCommaSeparated() {
-        return menu.stream().map(Dish::getName).collect(joining(", "));
+        return menu.stream()
+                .map(Dish::getName)
+                .collect(joining(", "));
     }
 }
